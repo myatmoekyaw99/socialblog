@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,25 +37,41 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showRegister()
     {
-        //
+        return view('user.register');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('user.edit',[
+           'user' => $user, 
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        if($request->filled('new-password')){
+            $user->password = Hash::make($request->input('new-password'));
+        }
+        
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+
+        $user->save();
+        return redirect('user')->with('success','User Updated successfully!');
+
     }
 
     /**

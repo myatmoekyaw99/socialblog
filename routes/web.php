@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
 
     //user route
     Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/user/{user}/edit',[UserController::class,'edit']);
+    Route::post('/user/{user}/update',[UserController::class,'update']);
+    Route::get('/user/register', [UserController::class, 'showRegister']);
 
     //blog route
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
