@@ -1,21 +1,18 @@
 <x-app-layout>
-<x-auth-session-status :status="session('success')"/>
+    <x-auth-session-status :status="session('success')" />
     {{-- <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Users') }}
-        </h2>
+    </h2>
     </x-slot> --}}
 
-<<<<<<< Updated upstream
     <div class="w-5">
         <a href="/user/register" class="btn btn-primary m-2">REGISTER</a>
     </div>
-    <div class="mt-3 container-fluid table-responsive">
+    <!-- <div class="mt-3 container-fluid table-responsive">
+        <table id="example" class="table table-bordered table-striped"> -->
+    <div class="mt-3 container-fluid">
         <table id="example" class="table table-bordered table-striped">
-=======
-    <div class="mt-3 container-fluid table-responsive">
-        <table id="example" class="table table-bordered table-striped" style="width: 100%;">
->>>>>>> Stashed changes
             <thead class="">
                 <tr>
                     <th class=" text-center">#</th>
@@ -27,7 +24,7 @@
             </thead>
             <tbody>
                 @php
-                    $id_no = 1;
+                $id_no = 1;
                 @endphp
                 @foreach($users as $user)
                 <tr>
@@ -39,20 +36,20 @@
                         <a href="user/{{$user->id}}/edit" class="btn btn-primary">Edit</a>
                         <a href="user/{{$user->id}}/delete" class="btn btn-danger">Delete</a>
                     </td>
-<<<<<<< Updated upstream
-                </tr>  
-                @endforeach
-=======
                 </tr>
->>>>>>> Stashed changes
+                @endforeach
             </tbody>
         </table>
     </div>
 </x-app-layout>
 <script>
-    $(document).ready(function() {
-        $('#example').DataTable({
-            // responsive: true,
-        });
+    $(function() {
+        $("#example").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            // "buttons": ["excel", "pdf", "print"]
+
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>
