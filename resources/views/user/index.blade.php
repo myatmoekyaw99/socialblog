@@ -6,11 +6,16 @@
         </h2>
     </x-slot> --}}
 
+<<<<<<< Updated upstream
     <div class="w-5">
         <a href="/user/register" class="btn btn-primary m-2">REGISTER</a>
     </div>
     <div class="mt-3 container-fluid table-responsive">
         <table id="example" class="table table-bordered table-striped">
+=======
+    <div class="mt-3 container-fluid table-responsive">
+        <table id="example" class="table table-bordered table-striped" style="width: 100%;">
+>>>>>>> Stashed changes
             <thead class="">
                 <tr>
                     <th class=" text-center">#</th>
@@ -34,8 +39,12 @@
                         <a href="user/{{$user->id}}/edit" class="btn btn-primary">Edit</a>
                         <a href="user/{{$user->id}}/delete" class="btn btn-danger">Delete</a>
                     </td>
+<<<<<<< Updated upstream
                 </tr>  
                 @endforeach
+=======
+                </tr>
+>>>>>>> Stashed changes
             </tbody>
         </table>
     </div>
@@ -47,4 +56,3 @@
         });
     });
 </script>
-
