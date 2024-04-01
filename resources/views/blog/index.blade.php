@@ -1,14 +1,62 @@
 <x-app-layout>
 <x-slot name="header">
         <div class="flex flex-row justify-between align-center">
-            <div class="basis1/4">
+            <div class="basis-1/4">
                 <p class="" style="font-size: 28px !important;">
                     {{ __('Posts') }}
                 </p>
             </div>
            
-            <div class="basis-1/4">
+            <!-- <div class="basis-1/4">
                 <a href="/blog/register" class="btn btn-primary">REGISTER</a>
+            </div> -->
+            <!-- Button trigger modal -->
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Register
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Post Create</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('post_create') }}" class="mx-auto bg-white px-5">
+                        @csrf
+                        <!-- Name -->
+                        <div>
+                            <x-input-label for="title" :value="__('Title')" />
+                            <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus autocomplete="title" />
+                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="mt-4">
+                            <x-input-label for="description" :value="__('Description')" />
+                            <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
+                            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            <!-- <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+                                {{ __('Already registered?') }}
+                            </a> -->
+
+                            <x-primary-button class="ms-4">
+                                {{ __('Create') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+                </div>
+            </div>
             </div>
         </div>
     </x-slot>
@@ -16,31 +64,32 @@
     <div class="py-12">
         <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
         <table id="example" class="table table-bordered table-striped">
-            <thead class="">
+            <thead>
                 <tr>
                     <th class=" text-center">#</th>
-                    <th class=" text-center ">Name</th>
-                    <th class="text-center">Email</th>
-                    <!-- <th class=" text-center">Password</th> -->
+                    <th class=" text-center ">Title</th>
+                    <th class="text-center">Description</th>
+                    <th class=" text-center">Slug</th>
                     <th class=" text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
-                {{--@php
+                @php
                 $id_no = 1;
                 @endphp
-                @foreach($users as $user)--}}
+                @foreach($blogs as $blog)
                 <tr>
-                    <td class="py-3 text-center">{{--$id_no--}}</td>
-                    <td class="py-3 text-center">{{--$user->name--}}</td>
-                    <td class="py-3 text-center">{{--$user->email--}}</td>
-                    <!-- <td class="py-3 text-center">{{--$user->password--}}</td> -->
+                    <td class="py-3 text-center">{{$id_no}}</td>
+                    <td class="py-3 text-center">{{$blog->title}}</td>
+                    <td class="py-3 text-center">{{$blog->description}}</td>
+                    <td class="py-3 text-center">{{$blog->slug}}</td>
+                    <!-- <td class="py-3 text-center">{{--$blog->password--}}</td> -->
                     <td class="py-3 text-center">
-                        <a href="user/{{--$user->id--}}/edit" class="btn btn-primary">Edit</a>
-                        <a href="user/{{--$user->id--}}/delete" class="btn btn-danger">Delete</a>
+                        <a href="blog/{{$blog->id}}/edit" class="btn btn-primary">Edit</a>
+                        <a href="blog/{{$blog->id}}/delete" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
-               {{-- @endforeach --}}
+                @endforeach 
             </tbody>
         </table>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -11,7 +12,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('blog.index');
+        return view('blog.index',[
+            'blogs' => Blog::latest()->get(),
+        ]);
     }
 
     /**
@@ -27,7 +30,16 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd('hit');
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+        
+        $data['slug'] = substr($request->description, 0, 20);
+
+        Blog::create($data);
+        return back()->with('success','Blog created successful!');
     }
 
     /**
@@ -43,7 +55,8 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // dd('hit');
+        return view('blog.edit');
     }
 
     /**
