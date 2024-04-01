@@ -1,17 +1,20 @@
 <x-app-layout>
-    <x-auth-session-status :status="session('success')" />
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Users') }}
-    </h2>
-    </x-slot> --}}
+    <x-slot name="header">
+        <div class="flex flex-row justify-between align-center">
+            <div class="basis1/4">
+                <p class="" style="font-size: 28px !important;">
+                    {{ __('Users') }}
+                </p>
+            </div>
+           
+            <div class="basis-1/4">
+                <a href="/user/register" class="btn btn-primary">REGISTER</a>
+            </div>
+        </div>
+    </x-slot>
 
-    <div class="w-5">
-        <a href="/user/register" class="btn btn-primary m-2">REGISTER</a>
-    </div>
-    <!-- <div class="mt-3 container-fluid table-responsive">
-        <table id="example" class="table table-bordered table-striped"> -->
-    <div class="mt-3 container-fluid">
+    <div class="py-12">
+        <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
         <table id="example" class="table table-bordered table-striped">
             <thead class="">
                 <tr>
@@ -31,15 +34,17 @@
                     <td class="py-3 text-center">{{$id_no}}</td>
                     <td class="py-3 text-center">{{$user->name}}</td>
                     <td class="py-3 text-center">{{$user->email}}</td>
-                    <!-- <td class="py-3 text-center">{{$user->password}}</td> -->
+                    <!-- <td class="py-3 text-center">{{--$user->password--}}</td> -->
                     <td class="py-3 text-center">
                         <a href="user/{{$user->id}}/edit" class="btn btn-primary">Edit</a>
                         <a href="user/{{$user->id}}/delete" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
-                @endforeach
+               @endforeach 
             </tbody>
         </table>
+
+        </div>
     </div>
 </x-app-layout>
 <script>
