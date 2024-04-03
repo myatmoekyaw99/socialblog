@@ -97,8 +97,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $image_path = $user->profile;
+        if (file_exists(public_path('storage/' . $image_path))) {
+            unlink(public_path('storage/' . $user->profile));
+        }
+
+        $user->delete();
+        return back()->with('delete', 'User Successfully deleted!');
     }
 }

@@ -98,7 +98,14 @@
         <strong>{{session('success')}}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
     </div>
+    @elseif(session('delete'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{session('delete')}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+    </div>
     @endif
+
+
     <div class="py-12">
         <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
             <table id="example" class="table table-bordered table-striped">
@@ -145,21 +152,19 @@
             "lengthChange": false,
             "autoWidth": false,
             // "buttons": ["excel", "pdf", "print"]
-            columnDefs: [
-        {
-            className: 'dtr-control',
-            orderable: false,
-            target: 0
-        }
-        ],
-        order: [1, 'asc'],
-        responsive: {
-            details: {
-                type: 'column',
-                target: 'tr'
+            columnDefs: [{
+                className: 'dtr-control',
+                orderable: false,
+                target: 0
+            }],
+            // order: [1, 'asc'],
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 'tr'
+                }
             }
-        }
 
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
 </script>

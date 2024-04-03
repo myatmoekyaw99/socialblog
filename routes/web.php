@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/{user}/edit',[UserController::class,'edit']);
     Route::post('/user/{user}/update',[UserController::class,'update']);
-    Route::get('/user/register', [UserController::class, 'showRegister']);
+    Route::get('/user/{user}/delete', [UserController::class, 'destroy']);
 
     //blog route
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
