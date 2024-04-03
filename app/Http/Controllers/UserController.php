@@ -57,17 +57,37 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        // dd($request->file('new_profile'));
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'bio' => 'required',
+            // 'new_profile' => 'required'
         ]);
 
-        if($request->filled('new-password')){
-            $user->password = Hash::make($request->input('new-password'));
+        if($request->filled('new_password')){
+            $user->password = Hash::make($request->input('new_password'));
         }
-        
+
+        if($request->hasFile('new_profile')){
+
+            // dd('hit');
+            if (file_exists(public_path('storage/'.$user->profile))){
+                unlink(public_path('storage/'.$user->profile));
+            } 
+
+            $file = $request->file('new_profile'); // Retrieve the uploaded file from the request
+            // dd($file);
+            $filename = $file->getClientOriginalName(); // Retrieve the original filename
+            $path = $file->storeAs(
+                'images', $filename
+            );
+            $user->profile = $path;
+        }
+        // dd('hit');
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->bio = $data['bio'];
 
         $user->save();
         return redirect('user')->with('success','User Updated successfully!');
