@@ -3,7 +3,7 @@
         <div class="flex flex-row justify-between align-center">
             <div class="basis-1/4">
                 <p class="" style="font-size: 28px !important;">
-                    {{ __('Posts') }}
+                    {{ __('Users') }}
                 </p>
             </div>
 
@@ -94,14 +94,18 @@
         </div>
     </x-slot>
     @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible d-flex justify-between fade show" role="alert">
         <strong>{{session('success')}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true" class="fs-3 fw-bold">&times;</span>
+        </button>
     </div>
     @elseif(session('delete'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible d-flex justify-between fade show" role="alert">
         <strong>{{session('delete')}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"  class="fs-3 fw-bold">&times;</span>
+        </button>
     </div>
     @endif
 
@@ -129,10 +133,14 @@
                         <td class="py-3 text-center">{{$user->name}}</td>
                         <td class="py-3 text-center">{{$user->email}}</td>
                         <td class="py-3 text-center">{{$user->bio}}</td>
-                        <td class="py-3 text-center"><img src='{{asset("storage/{$user->profile}")}}' alt="profile" width="50px" height="80px" class="mx-auto rounded"></td>
+                        <td class="py-3 text-center">
+                            <a href="/user/{{$user->id}}/detail">
+                                <img src='{{asset("storage/{$user->profile}")}}' alt="profile" width="50px" height="80px" class="mx-auto rounded">
+                            </a>
+                        </td>
                         <td class="py-3 text-center">
                             <a href="user/{{$user->id}}/edit" class="btn btn-primary">Edit</a>
-                            <a href="user/{{$user->id}}/delete" class="btn btn-danger">Delete</a>
+                            <a href="user/{{$user->id}}/delete" class="btn btn-danger" onclick="alert('Are you sure want to delete this user?')">Delete</a>
                         </td>
                     </tr>
                     @php
