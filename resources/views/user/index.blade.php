@@ -31,7 +31,7 @@
                                 </div>
 
                                 <!-- Email Address -->
-                                <div class="mt-4">
+                                <div class="mt-4">    
                                     <x-input-label class="fw-bold fs-6" for="email" :value="__('Email')" />
                                     <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required placeholder="Enter email" />
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -87,7 +87,7 @@
                         <!-- <div class="modal-footer">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button class="btn btn-primary">Save changes</button>
-                    </div> -->
+                        </div> -->
                     </div>
                 </div>
             </div>
