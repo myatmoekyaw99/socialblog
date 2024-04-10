@@ -33,13 +33,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/{user}/edit',[UserController::class,'edit']);
     Route::get('/user/{user}/detail',[UserController::class,'show']);
-    Route::post('/user/{user}/update',[UserController::class,'update']);
+    Route::post('/user/{user}/update',[UserController::class,'update'])->name('user.update');
     Route::get('/user/{user}/delete', [UserController::class, 'destroy']);
 
     //blog route
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
     Route::post('/blog/create',[BlogController::class,'store'])->name('post_create');
-    Route::get('/blog/{blog}/edit',[BlogController::class,'edit']);
+    Route::get('/blog/{blog}/edit',[BlogController::class,'edit'])->name('blog.edit');
+    Route::post('/blog/{blog}/edit',[BlogController::class,'update'])->name('blog.update');
+    Route::get('/blog/{blog}/delete',[BlogController::class,'destroy'])->name('blog.delete');
+    Route::get('/blog/{blog}/detail',[BlogController::class,'detail'])->name('blog.detail');
+
 });
 
 require __DIR__.'/auth.php';

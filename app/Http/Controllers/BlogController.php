@@ -30,14 +30,23 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('hit');
+        // dd($request->photo);
         $data = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'category' => 'required',
+            'photo' => 'required'
         ]);
         
-        $data['slug'] = substr($request->description, 0, 20);
-
+        // $data['slug'] = substr($request->description, 0, 20);
+        $file = $request->file('photo'); 
+        // dd($file);
+        $filename = $file->getClientOriginalName(); 
+        $path = $file->storeAs(
+            'images', $filename
+        );
+        $data['photo'] = $path;
+        
         Blog::create($data);
         return back()->with('success','Blog created successful!');
     }
@@ -53,25 +62,43 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
         // dd('hit');
-        return view('blog.edit');
+        return view('blog.edit',[
+            'blog' => $blog,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Blog $blog)
     {
         //
+        // dd($blog);
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $blog->update($data);
+        return redirect('/blog')->with('success','Blog Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        
+        return back()->with('delete','Blog deleted successful!');
+    }
+
+    public function detail(Blog $blog){
+        return view('blog.detail',[
+            'blog' => $blog
+        ]);
     }
 }

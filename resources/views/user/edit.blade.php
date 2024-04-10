@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="row bg-gray-300 mt-5">
-    <form method="POST" action="/user/{{$user->id}}/update" class="card col-11 col-md-8 mx-auto p-5" enctype="multipart/form-data">
+    <form method="POST" action="{{route('user.update',$user->id)}}" class="card col-11 col-md-8 mx-auto p-5" enctype="multipart/form-data">
         <h1 class="mb-4 display-5 fw-bold">Edit User</h1>
         @csrf
         <!-- Name -->

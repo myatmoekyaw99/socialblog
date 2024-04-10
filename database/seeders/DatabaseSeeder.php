@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'bio' => 'Web developer at SSE',
             'password' => Hash::make('admin'),
+            'profile' => 'images/admin.jpg'
         ]);
     }
 }
