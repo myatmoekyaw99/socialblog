@@ -79,10 +79,30 @@ class BlogController extends Controller
         // dd($blog);
         $data = $request->validate([
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'category' => 'required'
         ]);
 
-        $blog->update($data);
+        if($request->hasFile('new_photo')){
+
+            // dd('hit');
+             if (file_exists(public_path('storage/'.$blog->photo))){
+                unlink(public_path('storage/'.$blog->photo));
+            }
+            
+            $file = $request->file('new_photo'); // Retrieve the uploaded file from the request
+            // dd($file);
+            $filename = $file->getClientOriginalName(); // Retrieve the original filename
+            $path = $file->storeAs(
+                'photo', $filename
+            );
+            $blog->photo = $path;
+        }
+        $blog->title = $data['title'];
+        $blog->description = $data['description'];
+        $blog->category = $data['category'];
+        $blog->save();
+        // $blog->update($data);
         return redirect('/blog')->with('success','Blog Updated!');
     }
 

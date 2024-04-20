@@ -140,7 +140,7 @@
                         </td>
                         <td class="py-3 text-center">
                             <a href="user/{{$user->id}}/edit" class="btn btn-primary">Edit</a>
-                            <a href="user/{{$user->id}}/delete" class="btn btn-danger" onclick="alert('Are you sure want to delete this user?')">Delete</a>
+                            <a href="user/{{$user->id}}/delete" class="btn btn-danger" onclick="return confirm('Are you sure want to delete this user?')">Delete</a>
                         </td>
                     </tr>
                     @php
